@@ -8,7 +8,25 @@ CREATE TABLE users (
 	created_at TIMESTAMP DEFAULT NOW()
 );
 
+CREATE TABLE photos (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    image_url VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
 INSERT INTO users (username) VALUES
 ('Aashan'),
 ('Bob'),
 ('Charly');
+
+INSERT INTO photos (image_url, user_id) VALUES
+('/weiubw', 1),
+('/oigen', 2),
+('/erinoe', 2);
+
+SELECT photos.image_url, users.username
+FROM photos
+JOIN users
+	ON photos.user_id = users.id;
